@@ -11,13 +11,36 @@ and a small sample feature to copy from.
 Next.js 16 · React 19 · TypeScript · Tailwind v4 · shadcn/ui · TanStack Query ·
 React Hook Form + Zod · Axios · Biome
 
-## Getting started
+## Use this template
+
+Pick one:
+
+- On GitHub, click **Use this template** → **Create a new repository**.
+- Or from the terminal:
+
+  ```bash
+  npx create-next-app@latest my-app --example https://github.com/yash-189/next-starter
+  ```
+
+Then:
 
 ```bash
+cd my-app
 cp .env.example .env.local   # set API_URL to your backend
 npm install
 npm run dev
 ```
+
+### Make it yours
+
+1. Rename the project in `package.json` and `src/lib/site.ts`.
+2. Point `src/lib/http/endpoints.ts` at your API.
+3. If your responses aren't `{ success, data, meta }`, update
+   `src/lib/http/envelope.ts`.
+4. Copy `src/features/tasks` for your first feature, then delete `tasks`
+   and its route in `src/app/(app)/tasks`, plus `Routes.tasks`.
+5. Update `REFRESH_MAX_AGE_S` in `src/lib/session.ts` to match your
+   refresh token lifetime.
 
 The sample expects these endpoints. Change them in `src/lib/http/endpoints.ts`.
 
@@ -123,3 +146,7 @@ form.
 | `npm run build` | production build |
 
 Project conventions are in [AGENTS.md](AGENTS.md).
+
+## License
+
+MIT
