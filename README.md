@@ -82,7 +82,7 @@ src/
 │     │  └─ TaskForm.tsx
 │     ├─ hooks/useTasks.ts           queries and mutations
 │     ├─ api.ts                      backend calls
-│     ├─ queryKeys.ts
+│     ├─ queries.ts
 │     ├─ schemas.ts                  form validation
 │     ├─ types.ts
 │     └─ index.ts                    what other features can import
