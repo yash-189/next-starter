@@ -1,4 +1,5 @@
 import { isServer, MutationCache, QueryClient } from "@tanstack/react-query";
+import { cache } from "react";
 import { toast } from "sonner";
 import { ApiError } from "./http/errors";
 
@@ -18,11 +19,14 @@ function makeQueryClient() {
   });
 }
 
+// One client per server request, shared by every server component in it,
+// so users never share a cache.
+const getServerQueryClient = cache(makeQueryClient);
+
 let browserClient: QueryClient | undefined;
 
-// New client per server request so users never share a cache.
 export function getQueryClient() {
-  if (isServer) return makeQueryClient();
+  if (isServer) return getServerQueryClient();
   browserClient ??= makeQueryClient();
   return browserClient;
 }

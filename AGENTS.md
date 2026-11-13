@@ -18,7 +18,7 @@ file and the code disagree, trust the code and update this file.
 ```
 src/
   app/          routes only, no logic
-  features/<x>/ components/, hooks/, api.ts, queryKeys.ts, schemas.ts, types.ts, index.ts
+  features/<x>/ components/, hooks/, api.ts, queries.ts, schemas.ts, types.ts, index.ts
   ui/           primitives/ (shadcn) and components/ (shared UI)
   shared/       hooks/ and utils/ used by 2+ features, no business logic
   lib/          http/, session, env, query, routes, cookies, site
@@ -50,7 +50,7 @@ import files directly.
 |---|---|
 | Response types | `features/<x>/types.ts` |
 | Backend calls | `features/<x>/api.ts` |
-| Query keys | `features/<x>/queryKeys.ts` |
+| Query keys and queries (`queryOptions`) | `features/<x>/queries.ts` |
 | Form validation | `features/<x>/schemas.ts` |
 | Backend paths | `lib/http/endpoints.ts` |
 | Page paths, protected pages | `lib/routes.ts` |
@@ -81,6 +81,9 @@ No hardcoded paths, env reads or colors anywhere else.
   refresh goes to login.
 - Check `ApiError.code`, never the message text.
 - Reads and writes go through TanStack Query hooks. Server pages prefetch.
+- Each query is defined once in `queries.ts` with `queryOptions`, taking the
+  HTTP instance. Hooks call it with `clientHttp`; server pages prefetch it with
+  `serverHttp`. Keys live beside it in `<x>Keys` for invalidation.
 - Server actions are only for login and logout, because they set cookies.
 - Failed writes show a toast. Field errors go on the form instead.
 - `types.ts` is what the backend returns. Only add a separate UI type if the
